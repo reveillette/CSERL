@@ -55,7 +55,10 @@ select {
   color: #1295d8 !important;
   text-transform: uppercase;
   font-family: "KievitWebProMedi", Arial, Helvetica, sans-serif;
-  letter-spacing: 0.5px; }
+  letter-spacing: 0.5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
 
 .form-control, textarea {
   background-color: rgba(18, 149, 216, 0.2);
@@ -306,17 +309,21 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   margin: 0 0 20px 0 !important;
   float: right !important; }
 
-#navbar .collapse.in ul > li {
+#navbar .collapse.in ul.secondary li {
+  right: 15px; }
+
+#navbar .collapse.in ul.secondary a {
+  color: #1295d8 !important; }
+
+#navbar .collapse.in ul > li, #navbar .collapse.in #block-search-form {
   display: block !important;
   float: right;
-  margin-bottom: 8px;
-  clear: both; }
+  clear: both;
+  width: 300px;
+  text-align: right; }
 
-#navbar .collapse.in #block-search-form {
-  position: relative;
-  float: right;
-  display: block;
-  clear: both; }
+#navbar .collapse.in ul:not(.secondary) > li {
+  right: -15px; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - M A I N   C O N T E N T   A R E A - - - - - - - - - - - - - - - - - - - - - */
 .main-container {
@@ -365,10 +372,7 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   background: none !important;
   border-radius: 0 !important;
   padding: 0;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; }
+  cursor: pointer; }
 
 #block-views-exp-index-page .form-type-select * {
   width: auto;
@@ -529,11 +533,11 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .region-sidebar-first {
   background: none;
   border: none;
-  padding: 60px 30px;
-  position: relative;
-  min-height: 100vh;
-  height: 100%;
-  top: 0px; }
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: 230px; }
 
 .region-sidebar-second .form-control {
   font-size: 14px; }
@@ -544,6 +548,11 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .views-exposed-widget .fa, .fa {
   margin-left: 10px;
   font-weight: bold; }
+
+/* Breadcrumbs */
+.one-sidebar .breadcrumb {
+  position: relative;
+  left: -34%; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D A S H B O A R D S - - - - - - - - - - - - - - - - - - - - - */
 .table-bordered, .table-bordered tr, .table-bordered td {
@@ -568,6 +577,9 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   position: relative;
   top: 1px;
   left: 4px; }
+
+.views-field-edit-node a {
+  display: block; }
 
 /* Add content */
 .node-type-list {

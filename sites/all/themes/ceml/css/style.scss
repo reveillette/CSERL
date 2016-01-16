@@ -83,6 +83,9 @@
         text-transform: uppercase;
         font-family: $mediumFont;
         letter-spacing: 0.5px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;        
     }
 
     .form-control, textarea { 
@@ -288,14 +291,18 @@
         float: right !important; 
     }
 
-    #navbar .collapse.in ul>li {
+    #navbar .collapse.in ul.secondary li { right: $smallPadding; }
+    #navbar .collapse.in ul.secondary a { color: $blue !important; }
+
+    #navbar .collapse.in ul>li, #navbar .collapse.in #block-search-form {
         display: block !important;
         float: right;
-        margin-bottom: 8px;
         clear: both;
+        width: 300px;
+        text-align: right;
     }
 
-    #navbar .collapse.in #block-search-form { position: relative; float: right; display: block; clear: both; }
+    #navbar .collapse.in ul:not(.secondary)>li { right: -$smallPadding; }
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - M A I N   C O N T E N T   A R E A - - - - - - - - - - - - - - - - - - - - - */
@@ -344,9 +351,6 @@
         border-radius: 0 !important;
         padding: 0;
         cursor: pointer; 
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
     }
 
     #block-views-exp-index-page .form-type-select * { width: auto; display: inline-block; } 
@@ -481,11 +485,11 @@
     .region-sidebar-first {
         background: none;
         border: none;
-        padding: 60px 30px;
-        position: relative;
-        min-height: 100vh; 
-        height: 100%;
-        top: 0px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 230px;
     }
 
     .region-sidebar-second .form-control { 
@@ -497,6 +501,12 @@
     .views-exposed-widget .fa, .fa {
         margin-left: 10px; 
         font-weight: bold;
+    }
+
+    /* Breadcrumbs */
+    .one-sidebar .breadcrumb {
+        position: relative;
+        left: -34%;
     }
 
 
@@ -520,6 +530,8 @@
         top: 1px;
         left: $tinyPadding;
     }
+
+    .views-field-edit-node a { display: block; }
 
 
 
