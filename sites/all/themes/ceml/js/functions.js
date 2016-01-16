@@ -5,40 +5,49 @@ $(document).ready(function() {
 	$("#navbar .logo").attr('href', 'http://universityofcalifornia.edu/');
 	
 	// Dynamically change width of search box 
-	$("#block-search-form input").focusin(function() {
-		$(this).css('width', '160px');
-		$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '215px');
-	});
+	// $("#block-search-form input").focusin(function() {
+	// 	$(this).css('width', '160px');
+	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '215px');
+	// });
 
-	$("#block-search-form input").focusout(function() {
-		$(this).css('width', '70px');
-		$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '125px');
-	});
+	// $("#block-search-form input").focusout(function() {
+	// 	$(this).css('width', '70px');
+	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '125px');
+	// });
 
 
 	// Teasers
 
-		// Place teaser text
-		// Images
-		$('.node-teaser img, .node-teaser iframe, .node-teaser video, .node-teaser .google-map-field').on('load',function() {
-			$(this).each(function() {
-				var height = $(this).height();
-				console.log(height);
-				// Set position of text elements
-				$(this).parents('.node-teaser').find(".field, header").not('.field-type-image, .field-type-media, .field-type-google-map-field, footer .field').css('top', height);
-				// Set height of wrapper
-				$(this).parents('.node-teaser').css('height', height+200);
-			});
+		// Show teaser text on hover
+		$('.node-teaser .node-readmore a').mouseenter(function() {
+			$(this).parents('.node-teaser').find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, footer').css('display', 'block');
 		});
 
+		$('.node-teaser .node-readmore a').mouseleave(function() {
+			$(this).parents('.node-teaser').find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, footer').css('display', 'none');
+		});
+
+		// Place teaser text
+		// Images
+		// $('.node-teaser img, .node-teaser iframe, .node-teaser video, .node-teaser .google-map-field').on('load',function() {
+		// 	$(this).each(function() {
+		// 		var height = $(this).height();
+		// 		console.log(height);
+		// 		// Set position of text elements
+		// 		$(this).parents('.node-teaser').find(".field, header").not('.field-type-image, .field-type-media, .field-type-google-map-field, footer .field').css('top', height);
+		// 		// Set height of wrapper
+		// 		$(this).parents('.node-teaser').css('height', height+200);
+		// 	});
+		// });
+
 		// Change color band of teaser based on content type
-		$('.node-teaser').each(function() {			
-			if ($(this).hasClass('node-place')) {
-				$('.field-type-google-map-field').css('border-bottom-color', '#ff6e1b')
-			} else if ($(this).hasClass('node-person')) {
-				$('.field-type-image').css('border-bottom-color', '#ffe552')
-			} 
-		})
+		// $('.node-teaser').each(function() {			
+		// 	if ($(this).hasClass('node-place')) {
+		// 		$('.field-type-google-map-field').css('border-bottom-color', '#ff6e1b')
+		// 	} else if ($(this).hasClass('node-person')) {
+		// 		$('.field-type-image').css('border-bottom-color', '#ffe552')
+		// 	} 
+		// })
 		
 		
 		// Hide "Read More" text
