@@ -32,4 +32,5 @@ stylesheets[all][] = css/style.css
 ;; Scripts
 ;;;;;;;;;;;;;;;;;;;;;
 
+scripts[] = js/hoverIntent.js
 scripts[] = js/functions.js

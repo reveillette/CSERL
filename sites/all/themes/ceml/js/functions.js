@@ -4,52 +4,39 @@ $(document).ready(function() {
 	// Change link on logo to direct to UC site
 	$("#navbar .logo").attr('href', 'http://universityofcalifornia.edu/');
 	
-	// Dynamically change width of search box 
-	// $("#block-search-form input").focusin(function() {
-	// 	$(this).css('width', '160px');
-	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '215px');
-	// });
+	
+	// Create account - assign and disable role based on URL
+		
+		// Assistant
 
-	// $("#block-search-form input").focusout(function() {
-	// 	$(this).css('width', '70px');
-	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '125px');
-	// });
+		if ($('body').hasClass('page-user-register-assistant')) {
+			document.getElementById("edit-field-role-und").value=5;
+			document.getElementById("edit-field-role-und").disabled=true;
+			$("#edit-field-role-und option[value='4'],#edit-field-role-und option[value='6']").remove();
+
+		
+		// Faculty member
+		} else if ($('body').hasClass('page-user-register-faculty')) {
+			document.getElementById("edit-field-role-und").value=4;
+			document.getElementById("edit-field-role-und").disabled=true;
+			$("#edit-field-role-und option[value='5'],#edit-field-role-und option[value='6']").remove();			
+		
+		// Guest
+		} else {
+			document.getElementById("edit-field-role-und").value=6;
+			document.getElementById("edit-field-role-und").disabled=true;
+			$("#edit-field-role-und option[value='4'],#edit-field-role-und option[value='5']").remove();			
+
+		}
 
 
 	// Teasers
 
 		// Show teaser text on hover
-		$('.node-teaser .node-readmore a').mouseenter(function() {
-			$(this).parents('.node-teaser').find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, footer').css('display', 'block');
+		$('.node-teaser .node-readmore>a').hoverIntent(function() {
+			$(this).parents('.node-teaser').find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, .field-name-field-tags').slideToggle(200);
 		});
 
-		$('.node-teaser .node-readmore a').mouseleave(function() {
-			$(this).parents('.node-teaser').find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, footer').css('display', 'none');
-		});
-
-		// Place teaser text
-		// Images
-		// $('.node-teaser img, .node-teaser iframe, .node-teaser video, .node-teaser .google-map-field').on('load',function() {
-		// 	$(this).each(function() {
-		// 		var height = $(this).height();
-		// 		console.log(height);
-		// 		// Set position of text elements
-		// 		$(this).parents('.node-teaser').find(".field, header").not('.field-type-image, .field-type-media, .field-type-google-map-field, footer .field').css('top', height);
-		// 		// Set height of wrapper
-		// 		$(this).parents('.node-teaser').css('height', height+200);
-		// 	});
-		// });
-
-		// Change color band of teaser based on content type
-		// $('.node-teaser').each(function() {			
-		// 	if ($(this).hasClass('node-place')) {
-		// 		$('.field-type-google-map-field').css('border-bottom-color', '#ff6e1b')
-		// 	} else if ($(this).hasClass('node-person')) {
-		// 		$('.field-type-image').css('border-bottom-color', '#ffe552')
-		// 	} 
-		// })
-		
-		
 		// Hide "Read More" text
 		$('.node-readmore a').text('');
 	
@@ -59,7 +46,7 @@ $(document).ready(function() {
 
 		// Dynamically show and hide filters
 		// For media content		
-		if($('#edit-type').val() == "media") {
+		if($('#edit-type').val() == "media" || $('#edit-type').val() == "" ) {
 		    $('.views-widget-filter-field_content_type_value').show(); // show content type filter
 		    $('.views-widget-filter-type_1').show(); // show filetype filter
 		    $('.views-widget-filter-field_ownership_value').show(); // show ownership filter
@@ -116,7 +103,38 @@ $(document).ready(function() {
 		}
 	})
 
+	// Dynamically change width of search box 
+	// $("#block-search-form input").focusin(function() {
+	// 	$(this).css('width', '160px');
+	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '215px');
+	// });
 
+	// $("#block-search-form input").focusout(function() {
+	// 	$(this).css('width', '70px');
+	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '125px');
+	// });
+
+	// Place teaser text
+	// Images
+	// $('.node-teaser img, .node-teaser iframe, .node-teaser video, .node-teaser .google-map-field').on('load',function() {
+	// 	$(this).each(function() {
+	// 		var height = $(this).height();
+	// 		console.log(height);
+	// 		// Set position of text elements
+	// 		$(this).parents('.node-teaser').find(".field, header").not('.field-type-image, .field-type-media, .field-type-google-map-field, footer .field').css('top', height);
+	// 		// Set height of wrapper
+	// 		$(this).parents('.node-teaser').css('height', height+200);
+	// 	});
+	// });
+
+	// Change color band of teaser based on content type
+	// $('.node-teaser').each(function() {			
+	// 	if ($(this).hasClass('node-place')) {
+	// 		$('.field-type-google-map-field').css('border-bottom-color', '#ff6e1b')
+	// 	} else if ($(this).hasClass('node-person')) {
+	// 		$('.field-type-image').css('border-bottom-color', '#ffe552')
+	// 	} 
+	// })
 
 
 

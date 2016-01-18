@@ -17,6 +17,12 @@ html {
 body {
   background: #eef9ff; }
 
+.container {
+  position: relative; }
+
+:focus {
+  outline: none !important; }
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - T Y P O G R A P H Y - - - - - - - - - - - - - - - - - - - - - */
 strong, b {
   font-family: "KievitWebProBold", Arial, Helvetica, sans-serif; }
@@ -29,8 +35,7 @@ html, body, a, input {
   font-family: "KievitWebProBook", Arial, Helvetica, sans-serif;
   color: #1295d8; }
 
-.views-exposed-widget label, .block-title, .node-type-list dd, .fa, .control-label, .panel-title, .button, button, .btn, tr label, #comments h2, .main-container .field-label {
-  color: #1295d8 !important;
+.views-exposed-widget label, .control-label, .block-title, .node-type-list dd, .fa, .panel-title, .button, button, .btn, tr label, #comments h2, .main-container .field-label {
   text-transform: uppercase;
   font-size: 20px !important;
   letter-spacing: 0.5px;
@@ -44,9 +49,17 @@ a:hover {
   text-transform: underline; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F O R M S - - - - - - - - - - - - - - - - - - - - - */
-/* Block styling */
-select {
-  background: rgba(18, 149, 216, 0.2) !important;
+.form-control, textarea {
+  background-color: rgba(18, 149, 216, 0.2);
+  border-radius: 0 !important;
+  border: none;
+  color: #1295d8 !important;
+  font-family: 'KievitWebProBook'; }
+
+/* Select pulldowns */
+.form-control select, .form-group select {
+  background: rgba(18, 149, 216, 0.2) url("../down-arrow.png") no-repeat right;
+  background-size: 100px 10px;
   border-radius: 0 !important;
   outline: none !important;
   box-shadow: none !important;
@@ -60,13 +73,10 @@ select {
   -moz-appearance: none;
   appearance: none; }
 
-.form-control, textarea {
-  background-color: rgba(18, 149, 216, 0.2);
-  border-radius: 0 !important;
-  border: none;
-  color: white;
-  font-family: 'KievitWebProBook'; }
+.form-control select[multiple], .form-group select[multiple] {
+  background-image: none; }
 
+/* Tables */
 .table-responsive {
   overflow: visible; }
 
@@ -82,9 +92,7 @@ td {
 th {
   border: none !important; }
 
-.grippie {
-  display: none !important; }
-
+/* Bootstrap panels */
 .panel-default, .panel-heading {
   background: none !important;
   border-radius: 0; }
@@ -98,22 +106,35 @@ th {
 .panel {
   background: none; }
 
-.container {
-  position: relative; }
+.panel-flexible .pane-title {
+  display: none; }
 
-:focus {
-  outline: none !important; }
+/* Misc */
+.grippie {
+  display: none !important; }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D I V   S T Y L E S - - - - - - - - - - - - - - - - - - - - - */
-/* Buttons */
-.main-container button, .main-container .button, .main-container .btn {
-  padding: 6px 15px;
+/* Popovers & Tooltips */
+.tooltip-inner {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #1295d8 !important;
+  border: 1px solid #1295d8;
+  border-radius: 0;
+  text-align: left;
+  padding: 15px; }
+
+.tooltip-arrow {
+  border-right-color: white !important; }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - B U T T O N   S T Y L E S - - - - - - - - - - - - - - - - - - - - - */
+button, .button, .btn {
+  padding: 4px 15px;
   background-color: #e44c9a;
   border-radius: 0;
   margin: 20px 10px 0 0;
   display: inline-block !important;
   border: none;
-  float: left; }
+  float: left;
+  color: white !important; }
 
 .input-group-addon {
   border-radius: 0 !important;
@@ -132,7 +153,7 @@ th {
   padding: 2px 15px;
   border: 1px solid white; }
 
-.ctools-auto-submit-processed .views-submit-button button :not(.region-sidebar-second button) {
+.ctools-auto-submit-processed .views-submit-button button :not(.region-sidebar-first button) {
   display: none !important; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - H E A D E R   S T Y L E S - - - - - - - - - - - - - - - - - - - - - */
@@ -284,10 +305,13 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   color: white !important; }
 
 /* Collapse */
+.navbar-toggle {
+  display: none !important; }
+
 @media (max-width: 992px) {
   .navbar-toggle {
     display: block !important;
-    margin-right: 0; }
+    margin: 15px; }
 
   .navbar-collapse.collapse {
     display: none !important; }
@@ -337,6 +361,28 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .page-header {
   display: none; }
 
+/* Bootstrap Tabs */
+.nav-tabs > li > a:hover {
+  border-top-color: #eef9ff;
+  border-left-color: #eef9ff;
+  border-right-color: #eef9ff;
+  border-bottom-color: #1295d8; }
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background: none;
+  color: #1295d8;
+  text-decoration: underline; }
+
+.nav-tabs {
+  border-color: #1295d8; }
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  color: #1295d8;
+  cursor: default;
+  background: none;
+  border: 1px solid #1295d8;
+  border-bottom-color: #eef9ff; }
+
 /* Breadcrumbs & Sort pulldown */
 .breadcrumb, #block-views-exp-index-page {
   border-top: 1px solid #1295d8;
@@ -358,6 +404,11 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   font-family: "KievitWebProBold", Arial, Helvetica, sans-serif;
   letter-spacing: 0.5px; }
 
+/* Breadcrumbs on pages with sidebar */
+.one-sidebar .breadcrumb {
+  position: relative;
+  left: -34%; }
+
 #block-views-exp-index-page {
   position: absolute;
   right: 15px;
@@ -374,21 +425,11 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   padding: 0;
   cursor: pointer; }
 
-#block-views-exp-index-page .form-type-select * {
-  width: auto;
-  display: inline-block; }
-
 #block-views-exp-index-page .control-label {
   display: none; }
 
-#block-views-exp-index-page .form-type-select:after {
-  content: "\f107";
-  font-family: 'FontAwesome';
-  color: #1295d8;
-  font-size: 18px; }
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F R O N T P A G E - - - - - - - - - - - - - - - - - - - - - */
-.page-index .view-content, .node-form > div {
+.page-index .view-content, .page-browse .view-content, .page-media .view-content, .page-places .view-content, .page-people .view-content {
   margin: -15px;
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
@@ -402,7 +443,7 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   flex-wrap: wrap;
   justify-content: space-between; }
 
-.page-index .view-content > div {
+.page-index .view-content > div, .page-browse .view-content > div {
   -webkit-box-flex: none;
   /* OLD - iOS 6-, Safari 3.1-6 */
   -webkit-flex: none;
@@ -419,72 +460,59 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .node-teaser {
   position: relative;
   background-color: white;
-  overflow: hidden; }
+  overflow: hidden;
+  padding: 10px; }
 
 .node-teaser, .node-teaser .node-readmore a {
   display: block;
   width: 200px;
   height: 200px; }
 
-.node-teaser .node-readmore a {
-  z-index: 10000; }
-
 .node-teaser .node-readmore a:hover {
   background-color: #e44c9a; }
 
-.node-teaser header, .node-teaser .field-name-field-home-institution, .node-teaser .field-name-field-title, .node-teaser .field-name-field-organization {
+.node-teaser header, .node-teaser .field-name-field-home-institution, .node-teaser .field-name-field-title, .node-teaser .field-name-field-organization, .node-teaser .field-name-field-tags {
   display: none; }
 
 /* Teaser Image */
-.node-teaser .field-type-image, .node-teaser .field-type-media, .node-teaser .field-type-google-map-field {
+.node-teaser .field-type-image img, .node-teaser .field-type-media iframe, .node-teaser .field-type-media video, .node-teaser .google-map-field {
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 100%;
-  min-width: 100%;
-  height: auto;
-  width: auto;
-  width: auto;
-  overflow: hidden; }
-
-.node-teaser .field-type-image img, .node-teaser .field-type-media iframe, .node-teaser .field-type-media video, .node-teaser .google-map-field {
   min-height: 200px;
   min-width: 200px;
   height: auto;
   width: auto;
   margin: auto; }
 
-/* Teaser Text */
-.node-teaser header {
-  position: relative; }
+/* Teaser Body */
+.node-teaser header, .node-teaser .field-name-field-home-institution, .node-teaser .field-name-field-title, .node-teaser .field-name-field-organization, .node-teaser .field-name-field-tags {
+  position: relative;
+  z-index: 100;
+  color: white !important; }
 
 .node-teaser header h2 {
   line-height: 0.8 !important; }
 
 .node-teaser header h2 a {
-  color: #1295d8;
   font-size: 18px;
-  font-family: "KievitWebProBold", Arial, Helvetica, sans-serif; }
-
-.node-teaser .field {
-  position: relative; }
-
-.node-teaser .field-type-image, .node-teaser .field-type-media, .node-teaser .field-type-google-map-field {
-  border-bottom: 10px solid #e44c9a; }
+  font-family: "KievitWebProBold", Arial, Helvetica, sans-serif;
+  color: white !important; }
 
 .node-teaser .field-type-taxonomy-term-reference {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding: 10px;
-  background-color: #eee; }
+  border-top: 1px solid white; }
 
 .node-teaser .field-type-taxonomy-term-reference .field-item {
   display: inline-block;
   margin-right: 5px; }
 
 .node-teaser .field-type-taxonomy-term-reference .field-item a {
-  color: #1295d8; }
+  color: white !important;
+  text-decoration: underline; }
 
 .node-teaser .field-type-taxonomy-term-reference .field-item a:after {
   content: ","; }
@@ -502,25 +530,12 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .node-teaser .comment-add, .node-teaser .comment_forbidden {
   display: none !important; }
 
-.node-teaser {
-  -webkit-transition: hover 30ms !important;
-  /* Safari */
-  transition: hover 30ms !important; }
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - S I D E B A R - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - S I D E B A R S - - - - - - - - - - - - - - - - - - - - - */
 /* Widgets */
 .views-exposed-widget {
   padding: 0 !important;
-  margin-bottom: 20px; }
-
-.views-exposed-widget select {
-  border: none;
-  position: relative;
-  left: -8px; }
-
-.views-exposed-widget select[multiple="multiple"] {
-  border: 1px solid white;
-  left: 0; }
+  clear: both;
+  width: 100%; }
 
 .views-exposed-widget .control-label {
   display: none; }
@@ -537,9 +552,18 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   -webkit-box-shadow: none;
   box-shadow: none;
   padding: 0;
-  margin-top: 230px; }
+  margin-top: 176px;
+  padding-right: 50px; }
 
-.region-sidebar-second .form-control {
+.region-sidebar-first .block {
+  padding-bottom: 50px;
+  padding-top: 15px;
+  border-bottom: 1px solid #1295d8; }
+
+.region-sidebar-first .block:first-child {
+  border-top: 1px solid #1295d8; }
+
+.region-sidebar-first .form-control {
   font-size: 14px; }
 
 .radio .control-label, .checkbox .control-label, fieldset .control-label {
@@ -549,10 +573,18 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   margin-left: 10px;
   font-weight: bold; }
 
-/* Breadcrumbs */
-.one-sidebar .breadcrumb {
-  position: relative;
-  left: -34%; }
+.region-sidebar-first .views-field {
+  margin-top: 20px; }
+
+.region-sidebar-first .field-content {
+  display: block; }
+
+.region-sidebar-first a {
+  color: #1295d8 !important;
+  text-decoration: underline !important; }
+
+#block-invite-invite-add-invite-by-email .field-name-field-invitation-email-address input {
+  width: 100%; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D A S H B O A R D S - - - - - - - - - - - - - - - - - - - - - */
 .table-bordered, .table-bordered tr, .table-bordered td {
@@ -581,7 +613,11 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .views-field-edit-node a {
   display: block; }
 
-/* Add content */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - A D M I N   D A S H B O A R D - - - - - - - - - - - - - - - - - - - - - */
+#block-invite-invite-add-invite-by-email .views-exposed-widget label, .control-label {
+  font-size: 14px !important; }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - A D D   C O N T E N T - - - - - - - - - - - - - - - - - - - - - */
 .node-type-list {
   position: relative;
   left: 32px; }
@@ -617,29 +653,13 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 .views-widget-filter-field_media_fid {
   display: none; }
 
-/* Content display */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - V I E W   C O N T E N T - - - - - - - - - - - - - - - - - - - - - */
 .field-type-media iframe, .google_map_field_display {
   width: 100%; }
-
-.region-sidebar-second .views-field {
-  margin-top: 20px; }
-
-.region-sidebar-second .views-label {
-  font-weight: bold;
-  text-transform: uppercase; }
 
 .main-container .field-label {
   margin-top: 20px; }
 
-.region-sidebar-second .views-label {
-  font-weight: bold;
-  text-transform: uppercase; }
-
-.region-sidebar-second a {
-  color: #1295d8 !important;
-  text-decoration: underline !important; }
-
-/* Add content */
 .node-form > div > .form-group:not(#edit-actions), .node-form > div > fieldset {
   -webkit-box-flex: none;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -649,7 +669,7 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   /* IE 10 */
   flex: none;
   /* NEW, Spec - Firefox, Chrome, Opera */
-  border: 1px solid white;
+  border: 1px solid #1295d8;
   padding: 20px;
   margin-bottom: 50px; }
 
@@ -713,7 +733,7 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 /* Comments */
 #comments {
   margin-top: 50px;
-  border-top: 1px solid white; }
+  border-top: 1px solid #1295d8; }
 
 .comment-form {
   margin-top: 20px; }
@@ -728,19 +748,38 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 #comments .username {
   margin-left: 6px; }
 
-/* Sign on and register */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D A S H B O A R D S - - - - - - - - - - - - - - - - - - - - - */
 #user-register-form, #user-login, #user-pass {
   width: 30%;
   background-color: #1295d8;
   padding: 30px;
   border: 1px solid white;
   margin-top: 20px;
-  color: white; }
+  color: white !important; }
 
-.form-type-password {
+#user-register-form .control-label, #user-login .control-label, #user-pass .control-label {
+  color: white !important; }
+
+#user-register-form #edit-actions button, #user-login #edit-actions button, #user-pass #edit-actions button {
+  float: none !important; }
+
+#user-register-form .form-control, #user-login .form-control, #user-pass .form-control {
+  float: none !important;
+  background-color: white !important; }
+
+#user-register-form .form-control[disabled], #user-login .form-control[disabled], #user-pass .form-control[disabled] {
+  float: none !important;
+  background-color: #ccc !important;
+  color: #666 !important; }
+
+#user-register-form #edit-actions .form-control, #user-login #edit-actions .form-control, #user-pass #edit-actions .form-control {
+  float: none !important; }
+
+#user-register-form .form-type-password {
   clear: none !important;
   width: 50%; }
 
+#user-register-form
 .help-block.password-help {
   width: 100%;
   position: relative;

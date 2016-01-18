@@ -44,6 +44,9 @@
         background: $background-color; 
     }
 
+    .container { position: relative; }
+    :focus { outline: none !important; }
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - T Y P O G R A P H Y - - - - - - - - - - - - - - - - - - - - - */
 
@@ -52,14 +55,12 @@
     em, i { font-family: $italicFont; font-style: italic; }
     html, body, a, input { font-family: $bodyFont; color: $blue; }  
 
-    .views-exposed-widget label, .block-title, .node-type-list dd, .fa, .control-label, .panel-title, .button, button, .btn, tr label, #comments h2, .main-container .field-label { 
-        color: $blue !important; 
+    .views-exposed-widget label, .control-label, .block-title, .node-type-list dd, .fa, .panel-title, .button, button, .btn, tr label, #comments h2, .main-container .field-label { 
         text-transform: uppercase; 
         font-size: 20px !important;
         letter-spacing: 0.5px;
         font-weight: bold;
     }
-
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - L I N K S - - - - - - - - - - - - - - - - - - - - - */
 
@@ -70,10 +71,18 @@
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F O R M S - - - - - - - - - - - - - - - - - - - - - */
 
+    .form-control, textarea { 
+        background-color: $inputBG;
+        border-radius: 0 !important;
+        border: none; 
+        color: $blue !important; 
+        font-family: 'KievitWebProBook';
+    }
 
-    /* Block styling */ 
-    select {
-    	background: $inputBG !important;
+    /* Select pulldowns */
+    .form-control select, .form-group select {
+        background: $inputBG url("../down-arrow.png") no-repeat right;
+        background-size: 100px 10px;
         border-radius: 0 !important;
         outline: none !important;
         box-shadow: none !important;
@@ -85,45 +94,57 @@
         letter-spacing: 0.5px;
         -webkit-appearance: none;
         -moz-appearance: none;
-        appearance: none;        
+        appearance: none;    
+
     }
 
-    .form-control, textarea { 
-        background-color: $inputBG;
-        border-radius: 0 !important;
-        border: none; 
-        color: white; 
-        font-family: 'KievitWebProBook';
-    }
+    .form-control select[multiple], .form-group select[multiple] { background-image: none; }
+
+    /* Tables */
     .table-responsive { overflow: visible; }
     .tabledrag-toggle-weight-wrapper, .tabledrag-handle, .field-multiple-drag { display: none; }
     tr.draggable, tr.draggable:hover { background: none !important; } 
     td { padding: 0 !important; }
     th { border: none !important; }
-    .grippie { display: none !important; }
-    .panel-default, .panel-heading {
-        background: none !important; 
-        border-radius: 0;
-    }
+
+    
+    /* Bootstrap panels */
+    .panel-default, .panel-heading { background: none !important; border-radius: 0; }
     .panel-default { border: 1px solid white; }
     .panel-heading { border-bottom: 1px solid white; }
     .panel { background: none; }
+    .panel-flexible .pane-title { display: none; }
 
-    .container { position: relative; }
-    :focus { outline: none !important; }
+    
+    /* Misc */
+    .grippie { display: none !important; }
 
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D I V   S T Y L E S - - - - - - - - - - - - - - - - - - - - - */
+    /* Popovers & Tooltips */
+    .tooltip-inner {
+        background-color: rgba(255,255,255,0.9);
+        color: $blue !important;
+        border: $border $blue;
+        border-radius: 0;
+        text-align: left;
+        padding: $smallPadding;
+    }
 
-    /* Buttons */
-    .main-container button, .main-container .button, .main-container .btn { 
-        padding: 6px 15px; 
-        background-color: #e44c9a; 
+    .tooltip-arrow { border-right-color: white !important; }
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - B U T T O N   S T Y L E S - - - - - - - - - - - - - - - - - - - - - */
+
+    button, .button, .btn { 
+        padding: $tinyPadding $smallPadding; 
+        background-color: $accent; 
         border-radius: 0; 
         margin: 20px 10px 0 0;
         display: inline-block !important;
         border: none;
         float: left;
+        color: white !important;
     }
     .input-group-addon { 
         border-radius: 0 !important; 
@@ -135,7 +156,7 @@
     .input-group-addon .glyphicon { color: white !important;}
     .browse { background-color: #ffb511; }
     .input-group-btn button { margin: 0; padding: 2px 15px; border: 1px solid white; }
-    .ctools-auto-submit-processed .views-submit-button button :not(.region-sidebar-second button) { display: none !important; }
+    .ctools-auto-submit-processed .views-submit-button button :not(.region-sidebar-first button) { display: none !important; }
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - H E A D E R   S T Y L E S - - - - - - - - - - - - - - - - - - - - - */
@@ -263,10 +284,12 @@
 
 
     /* Collapse */
+    .navbar-toggle { display: none !important; }
+    
     @media (max-width: 992px) {
         .navbar-toggle {
             display: block !important;
-            margin-right: 0;
+            margin: $smallPadding;
         }
 
         .navbar-collapse.collapse {
@@ -317,6 +340,18 @@
     .page-header { display: none; }
 
 
+    /* Bootstrap Tabs */
+    .nav-tabs > li > a:hover { border-top-color: $background-color; border-left-color: $background-color; border-right-color: $background-color; border-bottom-color: $blue; }
+    .nav > li > a:hover, .nav > li > a:focus { background: none; color: $blue; text-decoration: underline; }
+    .nav-tabs { border-color: $blue; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        color: $blue;
+        cursor: default;
+        background: none;
+        border: $border $blue;
+        border-bottom-color: $background-color;
+    }
+
     /* Breadcrumbs & Sort pulldown */
     .breadcrumb, #block-views-exp-index-page {
         border-top: $border $blue;
@@ -337,6 +372,12 @@
         letter-spacing: 0.5px;
     }
 
+    /* Breadcrumbs on pages with sidebar */
+    .one-sidebar .breadcrumb {
+        position: relative;
+        left: -34%;
+    }
+
     #block-views-exp-index-page {
         position: absolute;
         right: $smallPadding;
@@ -353,19 +394,12 @@
         cursor: pointer; 
     }
 
-    #block-views-exp-index-page .form-type-select * { width: auto; display: inline-block; } 
     #block-views-exp-index-page .control-label { display: none; }
-    #block-views-exp-index-page .form-type-select:after { 
-        content: "\f107";
-        font-family: 'FontAwesome';
-        color: $blue;
-        font-size: 18px;
-    } 
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F R O N T P A G E - - - - - - - - - - - - - - - - - - - - - */
 
-    .page-index .view-content, .node-form>div {
+    .page-index .view-content, .page-browse .view-content, .page-media .view-content, .page-places .view-content, .page-people .view-content {
         margin: 0 -$smallPadding;
         display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
         display: -ms-flexbox;  /* TWEENER - IE 10 */
@@ -376,7 +410,7 @@
         justify-content: space-between;
     }
 
-    .page-index .view-content>div {
+    .page-index .view-content>div, .page-browse .view-content>div {
         -webkit-box-flex: none;   /* OLD - iOS 6-, Safari 3.1-6 */
         -webkit-flex: none;       /* Safari 6.1+. iOS 7.1+, BB10 */
         -ms-flex: none;           /* IE 10 */
@@ -391,6 +425,7 @@
         position: relative;        
         background-color: white;
         overflow: hidden;
+        padding: 10px;
     }
 
     .node-teaser, .node-teaser .node-readmore a {
@@ -399,25 +434,18 @@
         height: 200px;
     }
 
-    .node-teaser .node-readmore a { z-index: 10000; }
     .node-teaser .node-readmore a:hover { background-color: $accent; }
     
-    .node-teaser header, .node-teaser .field-name-field-home-institution, .node-teaser .field-name-field-title, .node-teaser .field-name-field-organization { display: none; }
+    .node-teaser header, .node-teaser .field-name-field-home-institution, .node-teaser .field-name-field-title, .node-teaser .field-name-field-organization, .node-teaser .field-name-field-tags { display: none; }
     
     /* Teaser Image */
     .node-teaser .field-type-image, .node-teaser .field-type-media, .node-teaser .field-type-google-map-field {
-        position: absolute;
-        top: 0;
-        left: 0;
-        min-height: 100%;
-        min-width: 100%;
-        height: auto;
-        width: auto; 
-        width: auto;
-        overflow: hidden;
     }
 
     .node-teaser .field-type-image img, .node-teaser .field-type-media iframe, .node-teaser .field-type-media video, .node-teaser .google-map-field {
+        position: absolute;
+        top: 0;
+        left: 0;        
         min-height: 200px;
         min-width: 200px;
         height: auto;
@@ -425,33 +453,26 @@
         margin: auto;
     }
 
-    /* Teaser Text */
-    .node-teaser header { position: relative; }
-    .node-teaser header h2 { line-height: 0.8 !important; }
-    .node-teaser header h2 a { color: #1295d8; font-size: 18px; font-family: $boldFont; }
-
-    .node-teaser .field {
+    /* Teaser Body */
+    .node-teaser header, .node-teaser .field-name-field-home-institution, .node-teaser .field-name-field-title, .node-teaser .field-name-field-organization, .node-teaser .field-name-field-tags { 
         position: relative;
+        z-index: 100;
+        color: white !important;
     }
 
-    
-
-    .node-teaser .field-type-image, .node-teaser .field-type-media, .node-teaser .field-type-google-map-field { 
-        border-bottom: 10px solid #e44c9a;
-    }
-
-    
+    .node-teaser header h2 { line-height: 0.8 !important; }
+    .node-teaser header h2 a { font-size: 18px; font-family: $boldFont; color: white !important; }
 
     .node-teaser .field-type-taxonomy-term-reference {
         position: absolute;
         bottom: 0;
         width: 100%;
         padding: 10px;
-        background-color: #eee;
+        border-top: $border white;
     }
 
     .node-teaser .field-type-taxonomy-term-reference .field-item { display: inline-block; margin-right: 5px; }
-    .node-teaser .field-type-taxonomy-term-reference .field-item a { color: #1295d8; }
+    .node-teaser .field-type-taxonomy-term-reference .field-item a { color: white !important; text-decoration: underline; }
     .node-teaser .field-type-taxonomy-term-reference .field-item a:after { content: ","; }
     .node-teaser .field-type-taxonomy-term-reference .field-item:last-child a:after { content: ""; }
 
@@ -463,22 +484,13 @@
         left: 0;
     }
 
-    .node-teaser .comment-add, .node-teaser .comment_forbidden {
-        display: none !important;
-    }
-
-    .node-teaser {
-        -webkit-transition: hover 30ms !important; /* Safari */
-        transition: hover 30ms !important;        
-    }
+    .node-teaser .comment-add, .node-teaser .comment_forbidden { display: none !important; }
 
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - S I D E B A R - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - S I D E B A R S - - - - - - - - - - - - - - - - - - - - - */
 
     /* Widgets */
-    .views-exposed-widget { padding: 0 !important; margin-bottom: 20px; }
-    .views-exposed-widget select { border: none; position: relative; left: -8px; }
-    .views-exposed-widget select[multiple="multiple"] { border: 1px solid white; left: 0; }
+    .views-exposed-widget { padding: 0 !important; clear: both; width: 100%; }
     .views-exposed-widget .control-label { display: none; }
     .views-exposed-widget .description { color: $blue; line-height: 1; margin: 5px 0 3px 0; }
 
@@ -489,13 +501,20 @@
         -webkit-box-shadow: none;
         box-shadow: none;
         padding: 0;
-        margin-top: 230px;
+        margin-top: 176px;
+        padding-right: $largePadding;
     }
 
-    .region-sidebar-second .form-control { 
-        font-size: 14px;
+    .region-sidebar-first .block {
+        padding-bottom: $largePadding; 
+        padding-top: $smallPadding;
+        border-bottom: $border $blue;
     }
 
+    .region-sidebar-first .block:first-child { border-top: $border $blue; }
+
+
+    .region-sidebar-first .form-control { font-size: 14px; }
     .radio .control-label, .checkbox .control-label, fieldset .control-label { font-size: 14px !important; }
 
     .views-exposed-widget .fa, .fa {
@@ -503,11 +522,11 @@
         font-weight: bold;
     }
 
-    /* Breadcrumbs */
-    .one-sidebar .breadcrumb {
-        position: relative;
-        left: -34%;
-    }
+    .region-sidebar-first .views-field { margin-top: 20px; }
+    .region-sidebar-first .field-content { display: block; }
+    .region-sidebar-first a { color: $blue !important; text-decoration: underline !important; }
+
+    #block-invite-invite-add-invite-by-email .field-name-field-invitation-email-address input { width: 100%; }
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D A S H B O A R D S - - - - - - - - - - - - - - - - - - - - - */
@@ -535,7 +554,14 @@
 
 
 
-/* Add content */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - A D M I N   D A S H B O A R D - - - - - - - - - - - - - - - - - - - - - */
+
+    #block-invite-invite-add-invite-by-email .views-exposed-widget label, .control-label, {
+        font-size: 14px !important;
+    }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - A D D   C O N T E N T - - - - - - - - - - - - - - - - - - - - - */
+
     .node-type-list { position: relative; left: 32px; }
     .node-type-list dt { height: 0; line-height: 0; }
     .node-type-list dd { margin-bottom: 15px; }
@@ -566,25 +592,18 @@
     .views-widget-filter-field_media_fid { display: none; }
 
 
-/* Content display */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - V I E W   C O N T E N T - - - - - - - - - - - - - - - - - - - - - */
 
     .field-type-media iframe, .google_map_field_display { width: 100%; }
-    .region-sidebar-second .views-field { margin-top: 20px; }
-    .region-sidebar-second .views-label { font-weight: bold; text-transform: uppercase; }
     .main-container .field-label { margin-top: 20px; }
-    .region-sidebar-second .views-label { font-weight: bold; text-transform: uppercase; }
-    .region-sidebar-second a { color: $blue !important; text-decoration: underline !important; }
+    
 
-
-
-
-    /* Add content */
     .node-form>div>.form-group:not(#edit-actions), .node-form>div>fieldset {
         -webkit-box-flex: none;   /* OLD - iOS 6-, Safari 3.1-6 */
         -webkit-flex: none;       /* Safari 6.1+. iOS 7.1+, BB10 */
         -ms-flex: none;           /* IE 10 */
         flex: none;               /* NEW, Spec - Firefox, Chrome, Opera */     
-        border: 1px solid white;
+        border: $border $blue;
         padding: 20px;
         margin-bottom: 50px;
     }
@@ -611,26 +630,37 @@
 
 
 /* Comments */
-    #comments { margin-top: 50px; border-top: 1px solid white; }
+    #comments { margin-top: 50px; border-top: $border $blue; }
     .comment-form { margin-top: 20px; }
     #comments .control-label { font-size: 14px !important; font-weight: normal !important; }
     #edit-comment-body-und-0-format { display: none; }
     #comments .username { margin-left: 6px; }
 
-/* Sign on and register */
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - D A S H B O A R D S - - - - - - - - - - - - - - - - - - - - - */
+
     #user-register-form, #user-login, #user-pass {
         width: 30%;
-        background-color: #1295d8;
-        padding: 30px;
-        border: 1px solid white;
+        background-color: $blue;
+        padding: $medPadding;
+        border: $border white;
         margin-top: 20px;
-        color: white;
+        color: white !important;
     }
 
-    .form-type-password {
+    #user-register-form .control-label, #user-login .control-label, #user-pass .control-label { color: white !important; }
+    #user-register-form #edit-actions button, #user-login #edit-actions button, #user-pass #edit-actions button { float: none !important; }
+    #user-register-form .form-control, #user-login .form-control, #user-pass .form-control { float: none !important; background-color: white !important; }
+    #user-register-form .form-control[disabled], #user-login .form-control[disabled], #user-pass .form-control[disabled] { float: none !important; background-color: #ccc !important; color: #666 !important; }
+    #user-register-form #edit-actions .form-control, #user-login #edit-actions .form-control, #user-pass #edit-actions .form-control { float: none !important; }
+
+    #user-register-form .form-type-password {
         clear: none !important;
         width: 50%;
     }
+
+    #user-register-form 
 
     .help-block.password-help {
         width: 100%;
