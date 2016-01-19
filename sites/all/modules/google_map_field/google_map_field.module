@@ -188,7 +188,7 @@ function google_map_field_format_field($item, $delta, $display) {
  */
 function google_map_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
 
-  google_map_field_add_maps_api();
+  $form['#attached']['js'][] = '//maps.googleapis.com/maps/api/js?sensor=false';
 
   $field_id = is_a($element['#entity'], 'FieldCollectionItemEntity') ? $element['#entity']->item_id : $field['id'];
   $field_id = empty($field_id) ? rand(10000000, 99999999) : $field_id;
