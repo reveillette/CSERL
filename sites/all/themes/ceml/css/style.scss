@@ -834,13 +834,15 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F O O T E R - - - - - - - - - - - - - - - - - - - - - */
 
     .footer { 
-    	width: calc(100% - #{(2*$container-margin)});
         margin: $container-margin;
         border-top: $border $blue;
-    	margin-top: $container-margin;
+        margin-top: $container-margin;
         color: $blue !important;
         padding: $medPadding 0;
+        width: calc(100% - #{(2*$container-margin)});
     }
+
+    .footer .container { padding: 0; margin: 0; width: 100%; }
 
     #footer-logo, #footer-menu { display: inline-block; }
     #footer-logo img { width: 120px; }

@@ -1010,12 +1010,17 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F O O T E R - - - - - - - - - - - - - - - - - - - - - */
 .footer {
-  width: calc(100% - 200px);
   margin: 100px;
   border-top: 1px solid #1295d8;
   margin-top: 100px;
   color: #1295d8 !important;
-  padding: 30px 0; }
+  padding: 30px 0;
+  width: calc(100% - 200px); }
+
+.footer .container {
+  padding: 0;
+  margin: 0;
+  width: 100%; }
 
 #footer-logo, #footer-menu {
   display: inline-block; }
