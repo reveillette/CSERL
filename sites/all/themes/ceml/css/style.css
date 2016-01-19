@@ -298,7 +298,7 @@ button:hover, .button:hover, .btn:hover, button:active, .button:active, .btn:act
   width: 150px; }
 
 #navbar .navbar-brand {
-  color: white;
+  color: white !important;
   line-height: 100%;
   font-size: 26px;
   padding: 0;
