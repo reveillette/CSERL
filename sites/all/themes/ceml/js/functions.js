@@ -8,7 +8,6 @@ $(document).ready(function() {
 	// Create account - assign and disable role based on URL
 		
 		// Assistant
-
 		if ($('body').hasClass('page-user-register-assistant')) {
 			document.getElementById("edit-field-role-und").value=5;
 			document.getElementById("edit-field-role-und").disabled=true;
@@ -22,7 +21,7 @@ $(document).ready(function() {
 			$("#edit-field-role-und option[value='5'],#edit-field-role-und option[value='6']").remove();			
 		
 		// Guest
-		} else {
+		} else if ($('body').hasClass('page-user-register')) {
 			document.getElementById("edit-field-role-und").value=6;
 			document.getElementById("edit-field-role-und").disabled=true;
 			$("#edit-field-role-und option[value='4'],#edit-field-role-und option[value='5']").remove();			
@@ -30,19 +29,87 @@ $(document).ready(function() {
 		}
 
 
-	// Teasers
+	// Sidebars
 
-		// Show teaser text on hover
-		$('.node-teaser .node-readmore>a').hoverIntent(function() {
-			$(this).parents('.node-teaser').find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, .field-name-field-tags').slideToggle(200);
-		});
+		// Disable tooltips
+		$('.views-exposed-widget [data-toggle=tooltip]').tooltip('disable') 
+
+		// Append caret to field display in sidebar
+		$('.views-exposed-widget>label, .block>.block-title').append("<i class='fa fa-angle-up'></i>"); 
+
+		// Minimize/maximize field display in sidebar
+		$('.views-exposed-widget>label, .block>.block-title').click(function() {
+			$(this).siblings().slideToggle();
+			if ($(this).find('i').hasClass('fa-angle-up')) {
+				$(this).find('i').removeClass('fa-angle-up').addClass('fa-angle-down');
+			} else if ($(this).find('i').hasClass('fa-angle-down')) {
+				$(this).find('i').removeClass('fa-angle-down').addClass('fa-angle-up');
+			}
+		})
+
+		// Invites
+
+			// Remove faculty member and guest options from invite widget on faculty dashboard
+			if ($('body').hasClass('page-dashboard')) {
+				document.getElementById("edit-field-invite-role-und").value=5;
+				document.getElementById("edit-field-invite-role-und").disabled=true;
+				$("#edit-field-invite-role-und option[value='4'], #edit-field-invite-role-und option[value='6']").remove();	
+			}		
+
+	// Admin dashboard 
+		
+		if ($('body').hasClass('page-admin-dashboard')) {
+
+			// Minimize content widget and content table on page load
+			$('#edit-field-content-type-tid-wrapper>label').siblings().slideUp(); 
+			$('.pane-content-admin').toggle();
+			
+			// Show/hide users widget and users table when content widget label is clicked
+			$('#edit-field-content-type-tid-wrapper>label').click(function() {
+				$('#edit-rid-wrapper>label').siblings().slideToggle();
+				$('.pane-admin-users').toggle();
+				$('.pane-content-admin').toggle();
+				$('input[type="checkbox"]').prop('checked', false);
+			}); 
+
+			// Show/hide content widget and content table when users widget label is clicked
+			$('#edit-rid-wrapper>label').click(function() {
+				$('#edit-field-content-type-tid-wrapper>label').siblings().slideToggle();
+				$('.pane-content-admin').toggle();
+				$('.pane-admin-users').toggle();
+				$('input[type="checkbox"]').prop('checked', false);
+			}); 
+
+		}
+
+
+
+	// Dashboards 
+		
+		// Programatically add up and down arrows to active table headers 
+		
+		$(".table-bordered th a.active[href*='asc']").after("<i class='fa fa-angle-down'></i>");
+		$(".table-bordered th a.active[href*='desc']").after("<i class='fa fa-angle-up'></i>");
+
+
+	// Teasers
 
 		// Hide "Read More" text
 		$('.node-readmore a').text('');
-	
+
+		// Show teaser text on hover
+		$('.node-teaser').mouseenter(function() {
+			$(this).find('.node-readmore a').fadeTo(200, 0.9);
+			$(this).find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, .field-name-field-tags').slideToggle(200);
+		});
+
+		$('.node-teaser').mouseleave(function() {
+			$(this).find('.node-readmore a').fadeTo(200, 0);
+			$(this).find('header, .field-name-field-home-institution, .field-name-field-title, .field-name-field-organization, .field-name-field-tags').slideToggle(200);
+		});	
 
 
-	// Find Content	
+	// Find Content	Page
 
 		// Dynamically show and hide filters
 		// For media content		
@@ -70,9 +137,6 @@ $(document).ready(function() {
 			$('.views-widget-filter-field_expertise_tid').hide(); // hide expertise filter
 		}
 
-			
-
-
 		// Move description before widget
 		$('.views-exposed-widget .description').each(function() {
 			var desc = $(this);
@@ -86,57 +150,22 @@ $(document).ready(function() {
 		});
 
 
-	// Remove container class from footer and add to region-footer
-	$('.footer').removeClass('container');
-	$('.region-footer').addClass('container');
+	// Add content page
 
-	// Append caret to field display in sidebar
-	$('.views-exposed-widget label').append("<i class='fa fa-angle-up'></i>"); 
-
-	// Minimize/maximize field display in sidebar
-	$('.views-exposed-widget label').click(function() {
-		$(this).siblings('.views-widget').slideToggle();
-		if ($(this).find('i').hasClass('fa-angle-up')) {
-			$(this).find('i').removeClass('fa-angle-up').addClass('fa-angle-down');
-		} else if ($(this).find('i').hasClass('fa-angle-down')) {
-			$(this).find('i').removeClass('fa-angle-down').addClass('fa-angle-up');
+		// Remove options to create a page or an article 
+		if ($('body').hasClass('page-node-add')) {
+			$('.node-type-list dd:contains("article")').remove();
+			$('.node-type-list dd:contains("basic page")').remove();
 		}
-	})
-
-	// Dynamically change width of search box 
-	// $("#block-search-form input").focusin(function() {
-	// 	$(this).css('width', '160px');
-	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '215px');
-	// });
-
-	// $("#block-search-form input").focusout(function() {
-	// 	$(this).css('width', '70px');
-	// 	$('ul.menu.nav.navbar-nav:not(.secondary)').css('margin-right', '125px');
-	// });
-
-	// Place teaser text
-	// Images
-	// $('.node-teaser img, .node-teaser iframe, .node-teaser video, .node-teaser .google-map-field').on('load',function() {
-	// 	$(this).each(function() {
-	// 		var height = $(this).height();
-	// 		console.log(height);
-	// 		// Set position of text elements
-	// 		$(this).parents('.node-teaser').find(".field, header").not('.field-type-image, .field-type-media, .field-type-google-map-field, footer .field').css('top', height);
-	// 		// Set height of wrapper
-	// 		$(this).parents('.node-teaser').css('height', height+200);
-	// 	});
-	// });
-
-	// Change color band of teaser based on content type
-	// $('.node-teaser').each(function() {			
-	// 	if ($(this).hasClass('node-place')) {
-	// 		$('.field-type-google-map-field').css('border-bottom-color', '#ff6e1b')
-	// 	} else if ($(this).hasClass('node-person')) {
-	// 		$('.field-type-image').css('border-bottom-color', '#ffe552')
-	// 	} 
-	// })
 
 
+	// Footer
+
+		// Remove container class from footer and add to region-footer
+		$('.footer').removeClass('container');
+		$('.region-footer').addClass('container');
+
+		$('.page-search .breadcrumb li.active').remove();
 
 });
 })(jQuery);
