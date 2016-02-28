@@ -188,7 +188,7 @@ function google_map_field_format_field($item, $delta, $display) {
  */
 function google_map_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
 
-  $form['#attached']['js'][] = '//maps.googleapis.com/maps/api/js?sensor=false';
+  $form['#attached']['js'][] = google_map_field_get_protocol() . 'maps.googleapis.com/maps/api/js?sensor=false';
 
   $field_id = is_a($element['#entity'], 'FieldCollectionItemEntity') ? $element['#entity']->item_id : $field['id'];
   $field_id = empty($field_id) ? rand(10000000, 99999999) : $field_id;
@@ -382,12 +382,12 @@ function google_map_field_add_maps_api() {
   if (variable_get('google_map_field_apikey', '') != '') {
     $element = array(
       '#type' => 'markup',
-      '#markup' => '<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false&key=' . variable_get('google_map_field_apikey', '') . '"></script>',
+      '#markup' => '<script type="text/javascript" src="' . google_map_field_get_protocol() . 'maps.googleapis.com/maps/api/js?sensor=false&key=' . variable_get('google_map_field_apikey', '') . '"></script>',
     );
     drupal_add_html_head($element, 'google_maps_api');
   }
   else {
-    drupal_add_js('//maps.googleapis.com/maps/api/js?sensor=false', 'external');
+    drupal_add_js(google_map_field_get_protocol() . 'maps.googleapis.com/maps/api/js?sensor=false', 'external');
   }
 }
 
@@ -404,4 +404,16 @@ function google_map_field_get_fields() {
     }
   }
   return $fields;
+}
+
+/**
+ * Helper function to return current protocol.
+ */
+function google_map_field_get_protocol() {
+  if (isset($_SERVER['HTTPS'])) {
+    return 'HTTPS://';
+  }
+  else {
+    return 'http://';
+  }
 }

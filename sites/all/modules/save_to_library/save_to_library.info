@@ -1,0 +1,3 @@
+name = "Save to Library"
+description = "Adds a Save to My Library link on content view, and asks current user to choose which of their associated user(s) to associate that piece of content with."
+core = 7.x

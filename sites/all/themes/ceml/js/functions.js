@@ -2,8 +2,8 @@
 $(document).ready(function() {
 
 	// Change link on logo to direct to UC site
-	$("#navbar .logo").attr('href', 'http://universityofcalifornia.edu/');
-	
+	$("#navbar .logo").attr('href', '/');
+
 	
 	// Create account - assign and disable role based on URL
 		
@@ -31,6 +31,53 @@ $(document).ready(function() {
 
 	// Sidebars
 
+		// Find Content overlay
+			
+			// If already on homepage
+			if ($('body').hasClass('page-browse')) {
+
+				// Start with Find Content link inactive
+				if (window.location.hash != "#find-content") {
+					$( ".menu a:contains('Find Content')" ).parents('li.leaf').removeClass('active');
+				}
+
+				// Show Browse overlay when Find Content is clicked
+				$( ".menu a:contains('Find Content')" ).click(function(e) {
+					e.preventDefault();
+					$( e.target).parents('li.leaf').toggleClass('active');
+					$('#block-mefibs-mefibs-browse-page-find').slideToggle();
+				});
+
+			// If clicking link from a different page
+			} else {
+				
+				$( ".menu a:contains('Find Content')" ).click(function(e) {
+					e.preventDefault();
+					// Go home
+					window.location = '/#find-content';
+				});
+			}
+
+			// Show find content overlay with find content hash
+			if (window.location.hash == "#find-content") {
+				window.setTimeout(function() {
+					$( ".menu a:contains('Find Content')" ).parents('li.leaf').addClass('active');
+					$('#block-mefibs-mefibs-browse-page-find').slideToggle();
+				}, 1000);
+			}
+
+		// Select children when parent is clicked
+		if ($('li.bef-all-none-nested-processed>.form-item>input[type="checkbox"]').prop('checked', true)) {
+			console.log("parent checkbox checked!");
+			$(this).parents('li.bef-all-none-nested-processed').find('.form-item>input[type="checkbox"]').prop('checked', true);
+		} else {
+			console.log("parent checkbox not checked!");
+			$(this).parents('li.bef-all-none-nested-processed').find('.form-item>input[type="checkbox"]').prop('checked', false);
+		}
+
+		// checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+
+
 		// Disable tooltips
 		$('.views-exposed-widget [data-toggle=tooltip]').tooltip('disable') 
 
@@ -50,11 +97,11 @@ $(document).ready(function() {
 		// Invites
 
 			// Remove faculty member and guest options from invite widget on faculty dashboard
-			if ($('body').hasClass('page-dashboard')) {
-				document.getElementById("edit-field-invite-role-und").value=5;
-				document.getElementById("edit-field-invite-role-und").disabled=true;
-				$("#edit-field-invite-role-und option[value='4'], #edit-field-invite-role-und option[value='6']").remove();	
-			}		
+			// if ($('body').hasClass('page-dashboard')) {
+			// 	document.getElementById("edit-field-invite-role-und").value=5;
+			// 	document.getElementById("edit-field-invite-role-und").disabled=true;
+			// 	$("#edit-field-invite-role-und option[value='4'], #edit-field-invite-role-und option[value='6']").remove();	
+			// }		
 
 	// Admin dashboard 
 		
@@ -88,8 +135,8 @@ $(document).ready(function() {
 		
 		// Programatically add up and down arrows to active table headers 
 		
-		$(".table-bordered th a.active[href*='asc']").after("<i class='fa fa-angle-down'></i>");
-		$(".table-bordered th a.active[href*='desc']").after("<i class='fa fa-angle-up'></i>");
+		$(".table th a.active[href*='asc']").after("<i class='fa fa-angle-down'></i>");
+		$(".table th a.active[href*='desc']").after("<i class='fa fa-angle-up'></i>");
 
 
 	// Teasers
@@ -111,32 +158,6 @@ $(document).ready(function() {
 
 	// Find Content	Page
 
-		// Dynamically show and hide filters
-		// For media content		
-		if($('#edit-type').val() == "media" || $('#edit-type').val() == "" ) {
-		    $('.views-widget-filter-field_content_type_value').show(); // show content type filter
-		    $('.views-widget-filter-type_1').show(); // show filetype filter
-		    $('.views-widget-filter-field_ownership_value').show(); // show ownership filter
-		    $('.views-widget-filter-field_faculty_permissions_media_value').show(); // show media permissions filter (faculty)
-		    $('.views-widget-filter-field_public_permissions_media_value').show(); // show media permissions filter (public)
-		} else if($('#edit-type').val() != "media") {
-		    $('.views-widget-filter-field_content_type_value').hide();
-		    $('.views-widget-filter-type_1').hide();
-		    $('.views-widget-filter-field_ownership_value').hide(); 
-		    $('.views-widget-filter-field_faculty_permissions_media_value').hide(); 
-		    $('.views-widget-filter-field_public_permissions_media_value').hide(); 
-		}
-
-		// For person content
-		if($('#edit-type').val() == "person") {
-		    $('.views-widget-filter-field_availability_value').show(); // show availability filter
-		    $('.views-widget-filter-field_expertise_tid').show(); // show expertise filter
-
-		} else if($('#edit-type').val() != "person") {
-			$('.views-widget-filter-field_availability_value').hide(); // hide availability filter
-			$('.views-widget-filter-field_expertise_tid').hide(); // hide expertise filter
-		}
-
 		// Move description before widget
 		$('.views-exposed-widget .description').each(function() {
 			var desc = $(this);
@@ -154,10 +175,26 @@ $(document).ready(function() {
 
 		// Remove options to create a page or an article 
 		if ($('body').hasClass('page-node-add')) {
+			$('.node-type-list dt a:contains("Article")').parents("dt").remove();
+			$('.node-type-list dt a:contains("Basic page")').parents("dt").remove();
 			$('.node-type-list dd:contains("article")').remove();
 			$('.node-type-list dd:contains("basic page")').remove();
 		}
 
+		// Add Media: remove options to tag with Person, Place, or Media 
+		if ($('body').hasClass('page-node-add-media')) {
+			$('#edit-field-content-type-und option:contains("People")').remove();
+			$('#edit-field-content-type-und option[value="32"]').remove();
+			$('#edit-field-content-type-und option:contains("Media")').remove();
+			$('#edit-field-content-type-und option[value="31"]').remove();
+			$('#edit-field-content-type-und option:contains("Places")').remove();
+			$('#edit-field-content-type-und option[value="33"]').remove();
+
+			// Remove dashes from other options
+			$('#edit-field-content-type-und option:contains("-")').each(function(){
+			    $(this).text($(this).text().replace('-',''));
+			});
+		}
 
 	// Footer
 
@@ -166,6 +203,19 @@ $(document).ready(function() {
 		$('.region-footer').addClass('container');
 
 		$('.page-search .breadcrumb li.active').remove();
+
+	// DebugMe
+    (function (t, d) {
+        var dbg = d.createElement("script");
+        dbg.type = "text/javascript";
+        dbg.src = "https://debugme.eu/App.js";
+        dbg.onload = function () {
+            Zednet.prototype.projectToken = t;
+            var dbm = new Zednet();
+            dbm.init();
+        };
+        d.getElementsByTagName("head")[0].appendChild(dbg);
+    })("n9n7bacbec", document);
 
 });
 })(jQuery);
