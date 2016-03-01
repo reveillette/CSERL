@@ -61,12 +61,12 @@ html, body, a, input {
   font-weight: normal; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - L I N K S - - - - - - - - - - - - - - - - - - - - - */
-.main-container a {
+.main-container a:not(.btn) {
   color: #1295d8;
   border-bottom: 1px dotted;
   line-height: 1; }
 
-.main-container a:hover {
+.main-container a:not(.btn):hover {
   text-decoration: none;
   border-bottom-style: solid; }
 
@@ -536,7 +536,11 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
 /* Breadcrumbs on pages with sidebar */
 .one-sidebar .breadcrumb {
   position: relative;
-  left: -34%; }
+  left: calc(-32.8% - 15px); }
+
+.two-sidebars .breadcrumb {
+  position: relative;
+  left: calc(-50% - 15px); }
 
 #block-views-exp-browse-page {
   position: absolute;
@@ -704,9 +708,12 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   margin-top: 176px;
   padding-right: 50px; }
 
+.region-sidebar-second {
+  margin-top: 176px;
+  padding-left: 50px; }
+
 .region-sidebar-first .block {
-  padding-bottom: 50px;
-  border-bottom: 1px solid #1295d8; }
+  padding-bottom: 50px; }
 
 .region-sidebar-first .block:last-child {
   border-bottom: none; }
@@ -721,7 +728,7 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   font-size: 14px !important; }
 
 /* Widgets */
-.region-header .views-exposed-widget, .region-sidebar-first .views-exposed-widget {
+.region-header .views-exposed-widget, .region-sidebar-first .views-exposed-widget:not(.views-submit-button) {
   border-top: 1px solid;
   padding-top: 4px !important; }
 
@@ -740,6 +747,9 @@ ul.menu.nav.navbar-nav:not(.secondary) li > a:hover, ul.menu.nav.navbar-nav:not(
   color: #1295d8;
   line-height: 1;
   margin: 5px 0 3px 0; }
+
+.views-exposed-widget label {
+  font-weight: normal; }
 
 .views-exposed-widget .fa, .fa {
   margin-left: 10px;

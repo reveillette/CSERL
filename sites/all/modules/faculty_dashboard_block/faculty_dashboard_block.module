@@ -1,0 +1,24 @@
+<?php
+/**
+ * @file
+ * A block module that displays recent blog and forum posts.
+ */
+
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param path 
+ *   Which path of the site we're using to display help
+ * @param arg 
+ *   Array that holds the current path as returned from arg() function
+ */
+
+function faculty_dashboard_block_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#current_posts":
+      return '<p>' . t("Displays a custom block on the Faculty Dashboard page with nested filters in the form of expandable folders.") . '</p>';
+      break;
+  }
+} 

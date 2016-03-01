@@ -67,13 +67,13 @@ $(document).ready(function() {
 			}
 
 		// Select children when parent is clicked
-		if ($('li.bef-all-none-nested-processed>.form-item>input[type="checkbox"]').prop('checked', true)) {
-			console.log("parent checkbox checked!");
-			$(this).parents('li.bef-all-none-nested-processed').find('.form-item>input[type="checkbox"]').prop('checked', true);
-		} else {
-			console.log("parent checkbox not checked!");
-			$(this).parents('li.bef-all-none-nested-processed').find('.form-item>input[type="checkbox"]').prop('checked', false);
-		}
+		// if ($('li.bef-all-none-nested-processed>.form-item>input[type="checkbox"]').prop('checked', true)) {
+		// 	console.log("parent checkbox checked!");
+		// 	$(this).parents('li.bef-all-none-nested-processed').find('.form-item>input[type="checkbox"]').prop('checked', true);
+		// } else {
+		// 	console.log("parent checkbox not checked!");
+		// 	$(this).parents('li.bef-all-none-nested-processed').find('.form-item>input[type="checkbox"]').prop('checked', false);
+		// }
 
 		// checkBoxes.prop("checked", !checkBoxes.prop("checked"));
 

@@ -87,8 +87,8 @@
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - L I N K S - - - - - - - - - - - - - - - - - - - - - */
 
-    .main-container a { color: $blue; border-bottom: 1px dotted; line-height: 1; }
-    .main-container a:hover { text-decoration: none; border-bottom-style: solid; }
+    .main-container a:not(.btn) { color: $blue; border-bottom: 1px dotted; line-height: 1; }
+    .main-container a:not(.btn):hover { text-decoration: none; border-bottom-style: solid; }
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F O R M S - - - - - - - - - - - - - - - - - - - - - */
@@ -474,7 +474,12 @@
     /* Breadcrumbs on pages with sidebar */
     .one-sidebar .breadcrumb {
         position: relative;
-        left: -34%;
+        left: calc(-32.8% - 15px);
+    }
+
+    .two-sidebars .breadcrumb {
+        position: relative;
+        left: calc(-50% - 15px);
     }
 
     #block-views-exp-browse-page {
@@ -508,6 +513,7 @@
     .pagination > li > a, .pagination > li > span { border: $border $blue; }
     .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus { background-color: $blue; color: white !important; }
     .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus { border-color: $blue; background-color: $inputBG; }
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - F R O N T P A G E - - - - - - - - - - - - - - - - - - - - - */
 
@@ -618,9 +624,13 @@
         padding-right: $largePadding;
     }
 
+    .region-sidebar-second {
+        margin-top: 176px;
+        padding-left: $largePadding;        
+    }
+
     .region-sidebar-first .block {
         padding-bottom: $largePadding; 
-        border-bottom: $border $blue;
     }
 
     .region-sidebar-first .block:last-child { border-bottom: none; }
@@ -630,11 +640,12 @@
 
     
     /* Widgets */
-    .region-header .views-exposed-widget, .region-sidebar-first .views-exposed-widget { border-top: $border; padding-top: $tinyPadding !important; }
+    .region-header .views-exposed-widget, .region-sidebar-first .views-exposed-widget:not(.views-submit-button) { border-top: $border; padding-top: $tinyPadding !important; }
     .views-exposed-widget { padding: 0 !important; clear: both; width: 100%; }
     .views-exposed-widget { margin-top: $medPadding; }
     .views-exposed-widget:first-child, .views-submit-button { margin-top: 0; }
     .views-exposed-widget .description { color: $blue; line-height: 1; margin: 5px 0 3px 0; }
+    .views-exposed-widget label { font-weight: normal; }
 
     .views-exposed-widget .fa, .fa {
         margin-left: 10px; 
