@@ -431,7 +431,12 @@ class view extends views_db_object {
       $display_id = ($this->display_handler->is_defaulted('filters')) ? 'default' : $this->current_display;
 
       if (empty($this->exposed_input) && !empty($_SESSION['views'][$this->name][$display_id])) {
-        $this->exposed_input = $_SESSION['views'][$this->name][$display_id];
+        foreach ($this->filter as $key => $filter) {
+          if (!empty($filter->options['expose']['remember'])) {
+            $this->exposed_input = $_SESSION['views'][$this->name][$display_id];
+          }
+        }
+
       }
     }
 

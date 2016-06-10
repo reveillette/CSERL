@@ -1,0 +1,3 @@
+name = "Feedback Block"
+description = Adds a list of private messages tagged "feedback request" in a block.
+core = 7.x

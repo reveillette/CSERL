@@ -1,0 +1,12 @@
+name = "Square cropping"
+description = "A dimensionless square cropping image style"
+core = 7.x
+package = "Image"
+version = 7.x-1.0
+dependencies[] = image
+; Information added by Drupal.org packaging script on 2015-02-28
+version = "7.x-1.0"
+core = "7.x"
+project = "square_crop"
+datestamp = "1425083286"
+

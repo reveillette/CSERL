@@ -260,7 +260,7 @@ Drupal.jsAC.prototype.setStatus = function (status) {
  */
 Drupal.ACDB = function (uri) {
   this.uri = uri;
-  this.delay = 300;
+  this.delay = 100;
   this.cache = {};
 };
 

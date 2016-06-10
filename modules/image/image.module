@@ -346,6 +346,17 @@ function image_file_delete($file) {
 function image_image_default_styles() {
   $styles = array();
 
+  $styles['icon'] = array(
+    'label' => 'Icon (50x50)',
+    'effects' => array(
+      array(
+        'name' => 'image_scale',
+        'data' => array('width' => 50, 'height' => 50, 'upscale' => 1),
+        'weight' => 0,
+      ),
+    )
+  );
+
   $styles['thumbnail'] = array(
     'label' => 'Thumbnail (100x100)',
     'effects' => array(

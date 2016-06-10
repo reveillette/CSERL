@@ -70,7 +70,7 @@ function template_preprocess_media_thumbnail(&$variables) {
  */
 function theme_media_formatter_large_icon($variables) {
   $file = $variables['file'];
-  $icon_dir = variable_get('media_icon_base_directory', 'public://media-icons') . '/' . variable_get('media_icon_set', 'default');
+  $icon_dir = variable_get('media_icon_base_directory', 'public://media-icons') . '/' . variable_get('media_icon_set', 'flat');
   $icon = file_icon_path($file, $icon_dir);
   $variables['path'] = $icon;
 

@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Counts and appends number of results in exposed filters.
+core = 7.x
+ */
+
+/**
+ * Implements hook_help().
+ */
+
+ function count_results_help($path, $arg) {
+ 	switch ($path) {
+	 case 'admin/help#request_access' :{
+	 	$ret_val = '<h3>' . t('About') . '</h3>';
+	 	$ret_val .= '<p>' . t('Counts and appends number of results in exposed filters.') . '</p>';
+	 	return $ret_val;
+	 	break;
+	 }
+ 	}
+ }
+
+ 
+/**
+ * Implements hook_form_alter
+ */
+
+function count_results_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'my_stuff') {
+
+    // Set an index if there are multiple terms used.	
+    $index = 0;
+    // Used for the array's string index.
+    $string_index = '';
+    
+    // Continue for each vocabulary that is used.
+    while (isset($form['tid' . $string_index])) {
+      	
+      // Cycle through each of the terms.	
+      foreach ($form['tid' . $string_index]['#options'] as $tid => $option) {
+        	
+        // Build a query to get the nodes for this term that have been
+        // specified as filters.	
+        $query = db_select('node', 'n')
+          ->fields('n', array('title'))
+          ->condition('n.type', $form_state['view']->display_handler->handlers['filter']['type']->value, 'IN')
+          ->condition('ti.tid', $tid, '=');
+
+        // A quirk in db_select(). You need to add the join separately.
+        $query->innerJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+
+        $results = $query->execute();
+
+        $count = $results->rowCount();
+        $form['tid' . $string_index]['#options'][$tid] .= ' (' . $count . ')';
+      }
+
+      // Increment for the next tid index in the array.
+      $index += 1;
+      $string_index = '_' . $index;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Implements hook_image_effect_info().
+ */
+
+function square_crop_image_effect_info() {
+  $effects = array();
+
+  $effects['square_crop'] = array(
+      'label' => t('Dimesionless Square Crop'),
+      'help' => t('Crops excess portions of an image to make the longer side the same as the smaller.  Uses Smartcrop if available'),
+      'effect callback' => 'square_crop_crop_effect',
+//      'dimensions callback' => 'image_resize_dimensions',
+  );
+
+  return $effects;
+}
+
+/**
+ * Image effect callback; Square crop an image resource.
+ * 
+ * 
+ */
+function square_crop_crop_effect(&$image) {
+  
+  //only act if they are differnets
+  if ($image->info['width'] != $image->info['height']) {
+    $size = min($image->info['width'],$image->info['height']);
+    $data['width'] = $size;
+    $data['height'] = $size;
+    $data['anchor'] = 'center-top';
+
+    image_crop_effect($image, $data); 
+  }
+
+}

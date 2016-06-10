@@ -36,7 +36,7 @@
     dialogHTML += '  <p>' + Drupal.t('Use the map below to drop a marker at the required location.') + '</p>';
     dialogHTML += '  <div id="gmf_container"></div>';
     dialogHTML += '  <div id="centre_on">';
-    dialogHTML += '    <label>' + Drupal.t('Enter an address/town/postcode etc to centre the map on:') + '<input type="text" name="centre_map_on" id="centre_map_on" value=""/></label>';
+    dialogHTML += '    <label>' + Drupal.t('Enter an address/town/postcode etc to center the map on:') + '<input type="text" name="centre_map_on" class="form-control" id="centre_map_on" value=""/></label>';
     dialogHTML += '    <button onclick="return doCentre();" type="button" role="button">' + Drupal.t('find') + '</button>';
     dialogHTML += '    <div id="map_error"></div>';
     dialogHTML += '  </div>';
