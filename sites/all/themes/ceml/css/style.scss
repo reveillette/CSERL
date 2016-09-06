@@ -478,7 +478,6 @@
         } 
     }
 
-    #block-search-form .ui-autocomplete { left: -10% !important; padding: 0;}
     #block-search-form input { float: right; text-align: right; font-size: $medFont !important; color: white !important; width: 80%; direction: rtl; }
     #block-search-form button:hover { color: $blue !important; }
     #block-search-form ::-webkit-input-placeholder { font-size: $medFont; color: white !important; }
@@ -536,7 +535,8 @@
 
         #navbar .navbar-header { height: 200px; }
         #block-search-form .input-group { right: $smallPadding; display: block; width: 94%; }
-        #navbar .collapse.in ul.ui-autocomplete { top: 0 !important; right: -15px !important; left: initial !important; }
+        #navbar .collapse.in ul.ui-autocomplete { top: 0 !important; right: -15px !important; left: initial !important; width: calc(100% + 17px) !important; }
+    
     }
 
 
@@ -634,8 +634,7 @@
         @extend .flexbox-parent;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: space-between;
-        align-content: space-around;
+        align-content: space-between;
         align-items: stretch;
     }
 
@@ -648,12 +647,9 @@
         }
 
         .page-index .view-content>div, .page-find-content .view-content>div, .page-taxonomy #block-system-main > .node-teaser, .page-media .view-content>div, .view-content>.node-teaser {
-            @include flexbox-child(1 0 40vw);
+            @include flexbox-child(1 0 100%);
+            min-width: 100%;
             margin: 2vw;
-        }
-
-        .node-teaser, .node-teaser .node-readmore a, .node-teaser .field-type-media video, .node-teaser .google_map_field_display, .node-teaser .field-type-media iframe { 
-            height: 40vw; 
         }
     }
 
@@ -665,12 +661,9 @@
 
         .page-index .view-content>div, .page-find-content .view-content>div, .page-taxonomy #block-system-main > .node-teaser, .page-media .view-content>div, .view-content>.node-teaser {
             @include flexbox-child(1 0 25vw);
+            max-width: 100vw;            
             margin: 2vw;
-        }
-
-        .node-teaser, .node-teaser .node-readmore a, .node-teaser .field-type-media video, .node-teaser .google_map_field_display, .node-teaser .field-type-media iframe { 
-            height: 25vw; 
-        }   
+        }  
     }
 
     /* Larger than a phone, smaller than a large desktop */
@@ -681,30 +674,27 @@
 
         .page-index .view-content>div, .page-find-content .view-content>div, .page-taxonomy #block-system-main > .node-teaser, .page-media .view-content>div, .view-content>.node-teaser {
             @include flexbox-child(1 0 15vw);
+            max-width: 30vw;            
             margin: 1vw;
         }
-
-        .node-teaser, .node-teaser .node-readmore a, .node-teaser .field-type-media video, .node-teaser .google_map_field_display, .node-teaser .field-type-media iframe { 
-            height: 15vw; 
-        }  
     } 
 
     /* Large desktops */
     @media (min-width: $xlScreen) {
         .page-index .view-content, .page-find-content .view-content, .page-taxonomy #block-system-main, .page-media .view-content, .page-browse-users .view-content  {
-            margin: -0.5vw;
+            margin: -0.75vw;
         }
 
         .page-index .view-content>div, .page-find-content .view-content>div, .page-taxonomy #block-system-main > .node-teaser, .page-media .view-content>div, .view-content>.node-teaser {
             @include flexbox-child(1 0 10vw);
-            margin: 0.5vw;
+            max-width: 20vw;            
+            margin: 0.75vw;
         }
-
-        .node-teaser, .node-teaser .node-readmore a, .node-teaser .field-type-media video, .node-teaser .google_map_field_display, .node-teaser .field-type-media iframe { 
-            height: 10vw; 
-        }  
     } 
 
+    .node-teaser, .node-teaser .node-readmore a, .node-teaser .field-type-media video, .node-teaser .google_map_field_display, .node-teaser .field-type-media iframe { 
+        height: 20vh; 
+    }  
 
     /* Teasers */ 
     li.node-readmore { width: 100%; padding: 0; }
@@ -871,8 +861,18 @@
     }
 
     /* Search Autocomplete */
+    #block-search-form .ui-autocomplete { 
+        width: 240px !important; 
+        left: -4px !important;
+        transform-origin: 0 0;
+        padding: 0;
+        min-width: 0;
+    }
+
+    .ui-autocomplete li.ui-menu-item { width: 100% !important; }
+    .ui-autocomplete li.ui-menu-item a { margin: 0; }
+    .ui-autocomplete li.ui-menu-item a:hover { cursor: pointer; }
     .ui-autocomplete { background-color: $blue !important; height: auto !important; border: none !important; border-radius: 0 !important; background-image: none; }
-    .ui-autocomplete li.ui-menu-item { max-width: 70% !important; }
     .ui-autocomplete .ui-autocomplete-field-group { height: 0; }
     .ui-autocomplete * { color: white !important; }
     .ui-autocomplete .ui-menu-item-first { border-color: white !important; }
@@ -1227,6 +1227,9 @@
         .form-actions button:last-child { float: right; }
         .form-actions button { margin: 0 $smallerPadding; }
     }
+
+    /* Bulk add */
+    .page-admin-content-file-bulk-upload #block-system-main { border-top: none !important; }
 
 
 /* VIEW CONTENT - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
