@@ -1,0 +1,21 @@
+diff --git a/mefibs.module b/mefibs.module
+index de3b6e3..822a8fb 100644
+--- a/mefibs.module
++++ b/mefibs.module
+@@ -704,8 +704,14 @@ function mefibs_exposed_block_form($view, $block_id) {
+ 
+   // This is important! Change the form id, otherwhise strange things are going
+   // to happen.
+-  $form['#id'] = $form['#id'] . '-' . mefibs_get_element_name_prefix($block_id);
+-  mefibs_set_form_id_recursive($form, mefibs_get_element_name_prefix($block_id));
++
++  // Don't change form id for autocomplete forms, else will break Javascript
++  // in misc/autocomplete.js when it detects autocomplete inputs by id.
++  if (! isset($form['contents']['#autocomplete_path'])) {
++    $form['#id'] = $form['#id'] . '-' . mefibs_get_element_name_prefix($block_id);
++    mefibs_set_form_id_recursive($form, mefibs_get_element_name_prefix($block_id));
++  }
++
+   mefibs_set_element_name_recursive($form, mefibs_get_element_name_prefix($block_id));
+ 
+   return $form;

@@ -21,6 +21,18 @@
 			// Change link on logo to direct to UC site
 			$("#navbar .logo").attr('href', '/');
 
+			// Add "bubble" to Explore text on homepage to non-logged-in users
+			var explore = $(".front.not-logged-in .breadcrumb li:contains('Explore')");
+			explore.attr('data-toggle', 'tooltip');
+			explore.attr('title', 'To explore CSERL, create an account or sign in above');
+			explore.attr('data-placement', 'right');
+
+			explore.tooltip();
+			explore.on({
+				mouseenter: function() { $(explore).tooltip('show') },
+				mouseleave: function() { $(explore).tooltip('hide') }
+			});
+
 			// Show "Find Content" dropdown overlay when url has "find-content" hash
 			if (window.location.hash == "#find-content") {
 				window.setTimeout(function() {
@@ -66,7 +78,7 @@
 		
 				// Admin Dashboard
 				if ($('body').hasClass('page-admin-dashboard') || $('body').hasClass('page-admin') || $("body").hasClass('page-admin-users') || $("body").hasClass('page-admin-content') || $("body").hasClass('page-user')) {
-					var initialLibrary = $('label[for="edit-content"]').siblings().add('#block-views-exp-content-admin-page #edit-secondary-wrapper');
+					var initialLibrary = $('label[for="edit-content"]').siblings().add('#edit-content-wrapper+#edit-secondary-wrapper');
 					toggleWidget(initialLibrary, function() {
 
 						// Set initial arrow direction
@@ -400,6 +412,14 @@
 						});
 					}
 
+					// Set top position of Find Content overlay
+			
+						// Get height of header + navbar
+						var carouselHeight = $("#carousel-bootstrap").height();
+						var topPos = carouselHeight * -1 + "px";
+						console.log(topPos);
+						$("#block-mefibs-mefibs-find-content-page-find").css('top', topPos);
+
 					// Make sure height of Find Content overlay equals height of main container
 					responsiveDiv($('#block-mefibs-mefibs-find-content-page-find'), $('.main-container'), 0, true, false);
 					$(window).resize(function() {
@@ -414,8 +434,8 @@
 				// Disable role field
 				$('#edit-field-user-role-und').prop('disabled','disabled');
 
-				// Change sign in button class to btn-success
-				$("#user-login .form-actions button").removeClass('btn-default');
+				// Change sign in button class to btn-primary
+				$("#user-login .form-actions button").removeClass('btn-default').addClass('btn-primary');
 
 				// Set value of Role field based on url parameter
 				var role = getParameter("role");
@@ -474,9 +494,9 @@
 						var toggle;
 
 						if($(e.target).attr('for') == 'edit-content') {
-							toggle = $('#edit-users-wrapper>label').siblings('.views-widget').add('#block-views-exp-content-admin-page #edit-secondary-wrapper');
+							toggle = $('#edit-users-wrapper>label').siblings('.views-widget').add('#edit-users-wrapper+#edit-secondary-wrapper');
 						} else if ($(e.target).attr('for') == 'edit-users') {			
-							toggle = $('#edit-content-wrapper>label').siblings('.views-widget').add('#block-views-exp-content-admin-page #edit-secondary-wrapper');
+							toggle = $('#edit-content-wrapper>label').siblings('.views-widget').add('#edit-content-wrapper+#edit-secondary-wrapper');
 						}
 
 						// Show/hide appropriate widget and table when minimize/maximize is clicked
@@ -521,26 +541,33 @@
 
 				}
 
-				// Add Media: remove options to tag with Person, Place, or Media (since these must be auto-set, not user-set)
-				if ($('body').hasClass('page-node-add-media') || $('body').hasClass('page-node-edit')) {
-					$('#edit-field-content-type-und option:contains("People")').remove();
-					$('#edit-field-content-type-und option[value="32"]').remove();
-					$('#edit-field-content-type-und option:contains("Media")').remove();
-					$('#edit-field-content-type-und option[value="31"]').remove();
-					$('#edit-field-content-type-und option:contains("Places")').remove();
-					$('#edit-field-content-type-und option[value="33"]').remove();
-
+				// Add Media/Add Bulk Media: remove options to tag with Person, Place, or Media (since these must be auto-set, not user-set)
+				if ($('body').hasClass('page-node-add-media') || $('body').hasClass('page-node-edit') || $('body').hasClass('page-admin-content-file-bulk-upload')) {
+					$('#edit-field-content-type-und option:contains("People")').add('#edit-default-values-field-content-type-und option:contains("People")').remove();
+					$('#edit-field-content-type-und option[value="32"]').add('#edit-default-values-field-content-type-und option[value="32"]').remove();
+					$('#edit-field-content-type-und option:contains("Media")').add('#edit-default-values-field-content-type-und option:contains("Media")').remove();
+					$('#edit-field-content-type-und option[value="31"]').add('#edit-default-values-field-content-type-und option[value="31"]').remove();
+					$('#edit-field-content-type-und option:contains("Places")').add('#edit-default-values-field-content-type-und option:contains("Places")').remove();
+					$('#edit-field-content-type-und option[value="33"]').add('#edit-default-values-field-content-type-und option[value="33"]').remove();
+					
 					// Remove dashes from other options
-					$('#edit-field-content-type-und option:contains("-")').each(function(){
+					$('#edit-field-content-type-und option:contains("-")').add('#edit-default-values-field-content-type-und option:contains("-")').each(function(){
 					    $(this).text($(this).text().replace('-',''));
 					});
 				}
 
+
 				// Add instructions to Add Person name field 
 				if ($('body').hasClass('page-node-add-person') || $('body').hasClass('page-node-edit')) {
 					var helptext = "<div class='help-block'>Please enter a first and last name in the Name field, e.g. John Doe.</div>";
-					$(helptext).insertAfter('.form-item-title .form-control');	
+					// check to see if helptext exists
+					if ($('.form-item-title .form-control + .help-block').length == 0) {
+						$(helptext).insertAfter('.form-item-title .form-control');	
+					}	
 				}
+
+				// Add file extension helptext to media browser (File Uploads)
+				$(".media-browser-tab #upload-instructions ul").append("<li>Files must have an extension. For example, \"image.jpg\" will work, while \"image\" will not.</li>");
 
 				// Change wording of "save" button to "publish"
 				$('.page-node-add #edit-actions #edit-submit').text('Publish');
@@ -754,5 +781,4 @@
 	}		
 
 })(jQuery);
-
 

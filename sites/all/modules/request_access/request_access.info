@@ -1,4 +1,0 @@
-name = Request Access
-description = Allows users to request access to a node, generating a message to the author of that node to grant access.
-core = 7.x
-version = 7.x-0.1-dev

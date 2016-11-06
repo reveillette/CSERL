@@ -243,6 +243,8 @@
     .panel td .control-label { display: none; }
     .panel thead { padding-top: $smallPadding; }
 
+    fieldset.panel { margin: $largePadding 0 !important; }
+
     /* Collapsible fieldsets */
     fieldset.collapsible { border: none !important; }     
     fieldset.collapsible .panel-heading { background-color: $blue !important; }
@@ -254,6 +256,16 @@
     fieldset.collapsible .form-item>.input-group { width: 100%; }
     fieldset.collapsible .form-item>label { text-align: left !important; }
     a.panel-title, #user-profile-form--2 a.panel-title { line-height: inherit; border-bottom: none !important; }
+    
+    /* Non-collapsible fieldsets */
+    fieldset:not(.collapsible) .form-item, fieldset, #user-profile-form--2 .form-item { position: relative; }
+    fieldset:not(.collapsible) .panel-heading  { padding: 0 !important; }
+    fieldset:not(.collapsible) .panel-title { position: absolute; top: -27px; margin-left: -$smallPadding; margin-bottom: $tinyPadding; }
+    fieldset:not(.collapsible) .panel-body { padding: 0; }
+    fieldset:not(.collapsible) button { margin-bottom: $smallPadding; }
+    
+    /* Nested fieldsets */
+    fieldset:not(.collapsible) fieldset { margin: $largePadding 0 0 0 !important; }
     
     /* Add Another Item */
     .field-multiple-table tbody tr, .field-multiple-table tbody tr td { padding: 0 !important; border-top: none !important; border-bottom: none !important; }
@@ -276,7 +288,10 @@
         padding: $smallPadding;
     }
 
-    .tooltip-arrow { border-top-color: white !important; }
+    .tooltip.top .tooltip-arrow { border-top-color: $blue !important; }
+    .tooltip.right .tooltip-arrow { border-right-color: $blue !important; }
+    .tooltip.bottom .tooltip-arrow { border-bottom-color: $blue !important; }
+    .tooltip.left .tooltip-arrow { border-left-color: $blue !important; }
 
     /* Alerts */
     .alert {
@@ -832,19 +847,20 @@
 
     .view-mode-search_result .field-name-field-content-type a, .view-mode-search_result .field-name-field-person a, .view-mode-search_result .field-name-field-place a { border-bottom: none !important; }
 
-    .view-mode-search_result .group-search-result-content-type {
+    .view-mode-search_result .group-search-result-content-type, .view-mode-search_result .group-person-content-type, .view-mode-search_result .group-place-content-type {
         margin: $smallPadding 5% $smallPadding 0;
         width: 10%;
         display: inline-block;
         vertical-align: top;
     }
-
+    .view-mode-search_result .group-place-content-type .google_map_field_display { width: 100%; }
+    
     .view-mode-search_result .field-name-author, .view-mode-search_result .field-name-field-tags {
         width: 50%;
         display: inline-block;
     }
 
-    .view-mode-search_result .group-search-result-text {
+    .view-mode-search_result .group-search-result-text, .view-mode-search_result .group-person-search-result-text, .view-mode-search_result .group-place-search-result-text {
         width: 85%;
         display: inline-block;
     }
@@ -1115,12 +1131,9 @@
         margin-bottom: $medPadding !important;
     }
 
-    .node-form .form-item, fieldset, #user-profile-form--2 .form-item { position: relative; }
     .node-form>div>.form-wrapper>.form-item>.control-label, .node-form>div>.form-wrapper>div:not(.panel-body)>.form-item>.control-label, #user-profile-form--2>div>.form-wrapper>.form-item>.control-label, #user-profile-form--2>div>.form-wrapper>div:not(.panel-body)>.form-item>.control-label { position: absolute; top: -$medPadding - $tinyPadding; }
-    .node-form .panel-heading, #user-profile-form--2 .panel-heading  { padding: 0 !important; }
-    .node-form .panel-title, #user-profile-form--2 .panel-title { position: absolute; top: -20px; }
-    .node-form .panel-body, #user-profile-form--2 .panel-body { padding: 0; }
-    .node-form fieldset button, #user-profile-form--2 fieldset button { margin-bottom: $smallPadding; }
+    .node-form fieldset.panel { margin: $smallerPadding $smallerPadding $medPadding $smallerPadding !important; }
+
 
     /* User */
     .page-user-edit .group-basic-info { width: 50%; }
@@ -1215,8 +1228,8 @@
 
     .page-node-add .node-form .tabbable .vertical-tabs-list { display: none; }
     .page-node-add #edit-author { margin: 0; padding: 0; border: none !important; }
-    .page-node-add #edit-author .form-autocomplete>.control-label { position: relative; top: calc(-20px - 14px); }
-    .page-node-add #edit-author .input-group { margin-top: -20px; }
+    .page-node-add #edit-author .form-autocomplete>.control-label { position: relative; top: calc(-27px - 14px); }
+    .page-node-add #edit-author .input-group { margin-top: -27px; }
 
 
     
@@ -1309,6 +1322,9 @@
         width: 50%; }
     .reset-password p { display: inline;  }
     .reset-password a { color: white !important; width: auto; }
+
+    /* User notifications */
+    .page-user-notifications #edit-options { margin: $medPadding 0 !important; }
 
     /* User relationships */
     .page-user-relationships .main-container .tabs--secondary { display: none; }
